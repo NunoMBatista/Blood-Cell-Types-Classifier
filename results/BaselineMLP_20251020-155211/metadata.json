@@ -1,0 +1,232 @@
+{
+  "model_name": "BaselineMLP",
+  "timestamp": "20251020-155211",
+  "architecture": {
+    "input_shape": [
+      3,
+      28,
+      28
+    ],
+    "hidden_dims": [
+      512,
+      256
+    ],
+    "num_classes": 8,
+    "dropout": 0.2
+  },
+  "loss": {
+    "name": "CrossEntropyLoss",
+    "repr": "CrossEntropyLoss()",
+    "state_dict_file": "loss_state.pt"
+  },
+  "optimizer": {
+    "name": "Adam",
+    "repr": "Adam (\nParameter Group 0\n    amsgrad: False\n    betas: (0.9, 0.999)\n    capturable: False\n    decoupled_weight_decay: False\n    differentiable: False\n    eps: 1e-08\n    foreach: None\n    fused: None\n    lr: 0.001\n    maximize: False\n    weight_decay: 0\n)",
+    "state_dict_file": "optimizer_state.pt",
+    "defaults": {
+      "lr": 0.001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": false
+    }
+  },
+  "metrics": {
+    "accuracy": 0.813212513923645,
+    "f1_macro": 0.7846824526786804
+  },
+  "confusion_matrix": {
+    "file": "confusion_matrix.pt",
+    "matrix": [
+      [
+        130,
+        9,
+        0,
+        68,
+        3,
+        34,
+        0,
+        0
+      ],
+      [
+        1,
+        597,
+        0,
+        6,
+        1,
+        7,
+        12,
+        0
+      ],
+      [
+        3,
+        1,
+        237,
+        26,
+        7,
+        1,
+        17,
+        19
+      ],
+      [
+        23,
+        30,
+        4,
+        408,
+        7,
+        64,
+        43,
+        0
+      ],
+      [
+        12,
+        3,
+        22,
+        35,
+        156,
+        2,
+        13,
+        0
+      ],
+      [
+        7,
+        3,
+        1,
+        72,
+        1,
+        195,
+        5,
+        0
+      ],
+      [
+        0,
+        35,
+        3,
+        28,
+        1,
+        7,
+        590,
+        2
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        469
+      ]
+    ]
+  },
+  "artifacts": {
+    "model_state": "model_state.pt",
+    "optimizer_state": "optimizer_state.pt",
+    "loss_state": "loss_state.pt"
+  },
+  "model_type": "MLP",
+  "extra": {
+    "per_class_metrics": {
+      "basophil": {
+        "precision": 0.7386363744735718,
+        "recall": 0.5327869057655334,
+        "f1": 0.6190476417541504,
+        "support": 244
+      },
+      "eosinophil": {
+        "precision": 0.8805309534072876,
+        "recall": 0.9567307829856873,
+        "f1": 0.9170507192611694,
+        "support": 624
+      },
+      "erythroblast": {
+        "precision": 0.8843283653259277,
+        "recall": 0.762057900428772,
+        "f1": 0.818652868270874,
+        "support": 311
+      },
+      "immature granulocytes(myelocytes, metamyelocytes and promyelocytes)": {
+        "precision": 0.6345256567001343,
+        "recall": 0.7046632170677185,
+        "f1": 0.6677578091621399,
+        "support": 579
+      },
+      "lymphocyte": {
+        "precision": 0.8863636255264282,
+        "recall": 0.6419752836227417,
+        "f1": 0.7446300387382507,
+        "support": 243
+      },
+      "monocyte": {
+        "precision": 0.6290322542190552,
+        "recall": 0.6866196990013123,
+        "f1": 0.6565656661987305,
+        "support": 284
+      },
+      "neutrophil": {
+        "precision": 0.8676470518112183,
+        "recall": 0.8858858942985535,
+        "f1": 0.8766716718673706,
+        "support": 666
+      },
+      "platelet": {
+        "precision": 0.9571428298950195,
+        "recall": 0.9978723526000977,
+        "f1": 0.9770833253860474,
+        "support": 470
+      }
+    },
+    "class_labels": [
+      "basophil",
+      "eosinophil",
+      "erythroblast",
+      "immature granulocytes(myelocytes, metamyelocytes and promyelocytes)",
+      "lymphocyte",
+      "monocyte",
+      "neutrophil",
+      "platelet"
+    ],
+    "training_history": [
+      {
+        "train_loss": 0.990232622561641,
+        "train_accuracy": 0.6273935947821724,
+        "val_loss": 0.6692779181159545,
+        "val_accuracy": 0.7628504672897196
+      },
+      {
+        "train_loss": 0.654080551168434,
+        "train_accuracy": 0.7650305209465674,
+        "val_loss": 0.5561828964224486,
+        "val_accuracy": 0.7938084112149533
+      },
+      {
+        "train_loss": 0.5737575417787437,
+        "train_accuracy": 0.7951333723555482,
+        "val_loss": 0.48959737681896887,
+        "val_accuracy": 0.8329439252336449
+      },
+      {
+        "train_loss": 0.5248799608078516,
+        "train_accuracy": 0.81026841709173,
+        "val_loss": 0.4724587235495309,
+        "val_accuracy": 0.8247663551401869
+      },
+      {
+        "train_loss": 0.49140297476887873,
+        "train_accuracy": 0.820888034116565,
+        "val_loss": 0.6018759106921259,
+        "val_accuracy": 0.7757009345794392
+      }
+    ]
+  }
+}
