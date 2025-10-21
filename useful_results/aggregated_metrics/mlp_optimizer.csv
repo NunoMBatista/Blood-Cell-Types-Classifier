@@ -1,0 +1,4 @@
+run,optimizer,learning_rate,weight_decay,hidden_dims,loss,accuracy,f1_macro
+SDG_momentum,SGD,0.01,0,512-256,CrossEntropyLoss,0.8246126770973206,0.8027457594871521
+adam,Adam,0.001,0,512-256,CrossEntropyLoss,0.8558900952339172,0.837236225605011
+adamw,AdamW,0.001,0.01,512-256,CrossEntropyLoss,0.8330897688865662,0.814791738986969

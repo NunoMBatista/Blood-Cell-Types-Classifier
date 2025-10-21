@@ -1,0 +1,2 @@
+run,optimizer,learning_rate,weight_decay,conv_channels,linear_dims,loss,accuracy,f1_macro
+adam_w,AdamW,0.001,0.01,32-64-128,128,CrossEntropyLoss,0.9403682947158813,0.9336895942687988

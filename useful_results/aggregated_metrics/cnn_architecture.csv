@@ -1,0 +1,2 @@
+run,conv_channels,linear_dims,dropout,optimizer,loss,accuracy,f1_macro
+baseline_CNN,32-64-128,128,0.3,Adam,CrossEntropyLoss,0.9313066601753235,0.9231039881706238

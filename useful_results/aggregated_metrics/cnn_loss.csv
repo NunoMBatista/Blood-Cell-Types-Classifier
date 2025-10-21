@@ -1,0 +1,3 @@
+run,loss,weighted,conv_channels,linear_dims,optimizer,accuracy,f1_macro
+cross_entropy,CrossEntropyLoss,False,32-64-128,128,Adam,0.9313066601753235,0.9231039881706238
+weighted_cross_entropy,CrossEntropyLoss,True,32-64-128,128,Adam,0.943291425704956,0.9380702376365662
