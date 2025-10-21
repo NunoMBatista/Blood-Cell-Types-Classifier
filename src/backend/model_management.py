@@ -77,16 +77,25 @@ def record_experiment(
     used_model_type = _resolve_model_type(model, model_type)
     trainable_params = int(sum(p.numel() for p in model.parameters() if p.requires_grad))
 
+    loss_metadata: Dict[str, Any] = {
+        "name": criterion.__class__.__name__,
+        "repr": repr(criterion),
+        "state_dict_file": loss_state_file,
+    }
+
+    weight_tensor = getattr(criterion, "weight", None)
+    if isinstance(weight_tensor, torch.Tensor) and weight_tensor.numel() > 0:
+        loss_metadata["weighted"] = True
+        loss_metadata["class_weights"] = weight_tensor.detach().cpu().tolist()
+    else:
+        loss_metadata["weighted"] = False
+
     metadata: Dict[str, Any] = {
         "model_name": model_name,
         "timestamp": used_timestamp,
         "architecture": dict(architecture),
         "trainable_parameters": trainable_params,
-        "loss": {
-            "name": criterion.__class__.__name__,
-            "repr": repr(criterion),
-            "state_dict_file": loss_state_file,
-        },
+        "loss": loss_metadata,
         "optimizer": {
             "name": optimizer.__class__.__name__,
             "repr": repr(optimizer),

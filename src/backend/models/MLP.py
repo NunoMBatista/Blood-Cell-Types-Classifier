@@ -32,6 +32,7 @@ class BaselineMLP(nn.Module):
 			layers.extend(
 				[
 					nn.Linear(in_features, hidden_dim),
+					nn.BatchNorm1d(hidden_dim),
 					nn.ReLU(inplace=True),
 					nn.Dropout(p=dropout),
 				]
@@ -46,6 +47,7 @@ class BaselineMLP(nn.Module):
 			"hidden_dims": list(self.hidden_dims),
 			"num_classes": self.num_classes,
 			"dropout": self.dropout,
+			"batch_norm": True,
 		}
 
 	def forward(self, x: torch.Tensor) -> torch.Tensor:
