@@ -1,0 +1,293 @@
+{
+  "model_name": "BaselineMLP",
+  "timestamp": "20251021-173259",
+  "architecture": {
+    "input_shape": [
+      3,
+      28,
+      28
+    ],
+    "hidden_dims": [
+      256
+    ],
+    "num_classes": 8,
+    "dropout": 0.2
+  },
+  "trainable_parameters": 604424,
+  "loss": {
+    "name": "CrossEntropyLoss",
+    "repr": "CrossEntropyLoss()",
+    "state_dict_file": "loss_state.pt"
+  },
+  "optimizer": {
+    "name": "Adam",
+    "repr": "Adam (\nParameter Group 0\n    amsgrad: False\n    betas: (0.9, 0.999)\n    capturable: False\n    decoupled_weight_decay: False\n    differentiable: False\n    eps: 1e-08\n    foreach: None\n    fused: None\n    lr: 0.001\n    maximize: False\n    weight_decay: 0\n)",
+    "state_dict_file": "optimizer_state.pt",
+    "defaults": {
+      "lr": 0.001,
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "weight_decay": 0,
+      "amsgrad": false,
+      "maximize": false,
+      "foreach": null,
+      "capturable": false,
+      "differentiable": false,
+      "fused": null,
+      "decoupled_weight_decay": false
+    }
+  },
+  "metrics": {
+    "accuracy": 0.848874568939209,
+    "f1_macro": 0.8282265663146973
+  },
+  "confusion_matrix": {
+    "file": "confusion_matrix.pt",
+    "matrix": [
+      [
+        136,
+        1,
+        0,
+        75,
+        12,
+        20,
+        0,
+        0
+      ],
+      [
+        14,
+        555,
+        0,
+        23,
+        2,
+        3,
+        27,
+        0
+      ],
+      [
+        3,
+        1,
+        271,
+        13,
+        10,
+        0,
+        10,
+        3
+      ],
+      [
+        19,
+        7,
+        3,
+        469,
+        18,
+        37,
+        26,
+        0
+      ],
+      [
+        3,
+        0,
+        10,
+        26,
+        197,
+        0,
+        7,
+        0
+      ],
+      [
+        4,
+        0,
+        2,
+        71,
+        4,
+        200,
+        3,
+        0
+      ],
+      [
+        0,
+        7,
+        7,
+        37,
+        2,
+        5,
+        607,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        469
+      ]
+    ]
+  },
+  "artifacts": {
+    "model_state": "model_state.pt",
+    "optimizer_state": "optimizer_state.pt",
+    "loss_state": "loss_state.pt"
+  },
+  "model_type": "MLP",
+  "extra": {
+    "per_class_metrics": {
+      "basophil": {
+        "precision": 0.7597765326499939,
+        "recall": 0.5573770403862,
+        "f1": 0.6430259943008423,
+        "support": 244
+      },
+      "eosinophil": {
+        "precision": 0.9719789624214172,
+        "recall": 0.8894230723381042,
+        "f1": 0.9288702607154846,
+        "support": 624
+      },
+      "erythroblast": {
+        "precision": 0.9217687249183655,
+        "recall": 0.8713826537132263,
+        "f1": 0.8958678245544434,
+        "support": 311
+      },
+      "immature granulocytes(myelocytes, metamyelocytes and promyelocytes)": {
+        "precision": 0.656862735748291,
+        "recall": 0.8100172877311707,
+        "f1": 0.7254446744918823,
+        "support": 579
+      },
+      "lymphocyte": {
+        "precision": 0.8040816187858582,
+        "recall": 0.8106995820999146,
+        "f1": 0.8073770999908447,
+        "support": 243
+      },
+      "monocyte": {
+        "precision": 0.7547169923782349,
+        "recall": 0.7042253613471985,
+        "f1": 0.7285974621772766,
+        "support": 284
+      },
+      "neutrophil": {
+        "precision": 0.8926470875740051,
+        "recall": 0.9114114046096802,
+        "f1": 0.9019315838813782,
+        "support": 666
+      },
+      "platelet": {
+        "precision": 0.9915433526039124,
+        "recall": 0.9978723526000977,
+        "f1": 0.9946978092193604,
+        "support": 470
+      }
+    },
+    "class_labels": [
+      "basophil",
+      "eosinophil",
+      "erythroblast",
+      "immature granulocytes(myelocytes, metamyelocytes and promyelocytes)",
+      "lymphocyte",
+      "monocyte",
+      "neutrophil",
+      "platelet"
+    ],
+    "training_history": [
+      {
+        "train_loss": 1.0493370252555105,
+        "train_accuracy": 0.6268918805920227,
+        "val_loss": 0.7104514269071205,
+        "val_accuracy": 0.7610981308411215
+      },
+      {
+        "train_loss": 0.7104630359928288,
+        "train_accuracy": 0.7552470942386487,
+        "val_loss": 0.6062283220692216,
+        "val_accuracy": 0.7897196261682243
+      },
+      {
+        "train_loss": 0.618946896881072,
+        "train_accuracy": 0.786520612091312,
+        "val_loss": 0.5242161149176482,
+        "val_accuracy": 0.8130841121495327
+      },
+      {
+        "train_loss": 0.5658323153503285,
+        "train_accuracy": 0.8027427042394849,
+        "val_loss": 0.5147341339387627,
+        "val_accuracy": 0.8276869158878505
+      },
+      {
+        "train_loss": 0.5322826121281856,
+        "train_accuracy": 0.8082615603311314,
+        "val_loss": 0.47199326809321607,
+        "val_accuracy": 0.8411214953271028
+      },
+      {
+        "train_loss": 0.4925998063308358,
+        "train_accuracy": 0.8234802240990049,
+        "val_loss": 0.466733003331122,
+        "val_accuracy": 0.8399532710280374
+      },
+      {
+        "train_loss": 0.46550350963884957,
+        "train_accuracy": 0.8346015553139895,
+        "val_loss": 0.4518111788223837,
+        "val_accuracy": 0.8440420560747663
+      },
+      {
+        "train_loss": 0.447653012871194,
+        "train_accuracy": 0.8374446023915043,
+        "val_loss": 0.4272863020963758,
+        "val_accuracy": 0.8475467289719626
+      },
+      {
+        "train_loss": 0.43188135405030975,
+        "train_accuracy": 0.8468099339409649,
+        "val_loss": 0.42122005302215293,
+        "val_accuracy": 0.844626168224299
+      },
+      {
+        "train_loss": 0.4098846899500179,
+        "train_accuracy": 0.8534158374446024,
+        "val_loss": 0.4229440184954171,
+        "val_accuracy": 0.8481308411214953
+      },
+      {
+        "train_loss": 0.39825373367677513,
+        "train_accuracy": 0.8551718371101262,
+        "val_loss": 0.43657741507637166,
+        "val_accuracy": 0.8370327102803738
+      },
+      {
+        "train_loss": 0.3931239236556464,
+        "train_accuracy": 0.8580985032193327,
+        "val_loss": 0.41120878697555757,
+        "val_accuracy": 0.8492990654205608
+      },
+      {
+        "train_loss": 0.38229494000300585,
+        "train_accuracy": 0.8620285977088386,
+        "val_loss": 0.40257850902102815,
+        "val_accuracy": 0.852803738317757
+      },
+      {
+        "train_loss": 0.378972666584954,
+        "train_accuracy": 0.8625303118989882,
+        "val_loss": 0.42112301415372116,
+        "val_accuracy": 0.8533878504672897
+      },
+      {
+        "train_loss": 0.3570172718256271,
+        "train_accuracy": 0.8717284053850657,
+        "val_loss": 0.4056966906396028,
+        "val_accuracy": 0.8545560747663551
+      }
+    ]
+  },
+  "epochs": 15
+}

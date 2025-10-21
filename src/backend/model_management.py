@@ -75,11 +75,13 @@ def record_experiment(
     torch.save(confusion_cpu, run_dir / confusion_file)
 
     used_model_type = _resolve_model_type(model, model_type)
+    trainable_params = int(sum(p.numel() for p in model.parameters() if p.requires_grad))
 
     metadata: Dict[str, Any] = {
         "model_name": model_name,
         "timestamp": used_timestamp,
         "architecture": dict(architecture),
+        "trainable_parameters": trainable_params,
         "loss": {
             "name": criterion.__class__.__name__,
             "repr": repr(criterion),
