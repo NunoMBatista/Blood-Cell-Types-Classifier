@@ -1,0 +1,12 @@
+[
+  {
+    "model_name": "BaselineCNN",
+    "model_type": "CNN",
+    "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineCNN_20251021-160359",
+    "timestamp": "20251021-160359",
+    "metrics": {
+      "accuracy": 0.9301373958587646,
+      "f1_macro": 0.919629693031311
+    }
+  }
+]

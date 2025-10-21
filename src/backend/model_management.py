@@ -57,6 +57,7 @@ def record_experiment(
     extra_metadata: Dict[str, Any] | None = None,
     timestamp: str | None = None,
     model_type: str | None = None,
+    epochs: int | None = None,
 ) -> Dict[str, Any]:
     """Persist model artifacts and metadata for reproducibility."""
 
@@ -105,6 +106,9 @@ def record_experiment(
 
     if extra_metadata:
         metadata["extra"] = extra_metadata
+
+    if epochs is not None:
+        metadata["epochs"] = int(epochs)
 
     with open(run_dir / "metadata.json", "w", encoding="utf-8") as fh:
         json.dump(metadata, fh, indent=2)
