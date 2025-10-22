@@ -2,6 +2,16 @@
   {
     "model_name": "BaselineCNN",
     "model_type": "CNN",
+    "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineCNN_20251022-140022",
+    "timestamp": "20251022-140022",
+    "metrics": {
+      "accuracy": 0.9380298256874084,
+      "f1_macro": 0.9329959750175476
+    }
+  },
+  {
+    "model_name": "BaselineCNN",
+    "model_type": "CNN",
     "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineCNN_20251022-102028",
     "timestamp": "20251022-102028",
     "metrics": {
@@ -37,16 +47,6 @@
     "metrics": {
       "accuracy": 0.8646594285964966,
       "f1_macro": 0.8488755226135254
-    }
-  },
-  {
-    "model_name": "BaselineMLP",
-    "model_type": "MLP",
-    "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineMLP_20251022-101939",
-    "timestamp": "20251022-101939",
-    "metrics": {
-      "accuracy": 0.8576439619064331,
-      "f1_macro": 0.8399011492729187
     }
   }
 ]

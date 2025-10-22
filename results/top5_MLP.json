@@ -22,6 +22,16 @@
   {
     "model_name": "BaselineMLP",
     "model_type": "MLP",
+    "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineMLP_20251022-135915",
+    "timestamp": "20251022-135915",
+    "metrics": {
+      "accuracy": 0.8477053642272949,
+      "f1_macro": 0.8290503621101379
+    }
+  },
+  {
+    "model_name": "BaselineMLP",
+    "model_type": "MLP",
     "results_dir": "/home/nuno/Documents/Blood-Cell-Types-Classifier/results/BaselineMLP_20251022-105002",
     "timestamp": "20251022-105002",
     "metrics": {

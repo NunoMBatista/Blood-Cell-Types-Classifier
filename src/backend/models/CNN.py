@@ -34,7 +34,7 @@ class BaselineCNN(nn.Module):
                     nn.ReLU(inplace=True),
                 ]
             )
-            # Downsample after each block to control spatial resolution.
+            # downsample after each block to control spatial resolution.
             feature_layers.append(nn.MaxPool2d(kernel_size=2))
             in_channels = out_channels
 

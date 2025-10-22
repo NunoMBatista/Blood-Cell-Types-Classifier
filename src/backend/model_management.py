@@ -31,8 +31,6 @@ def _safe_name(name: str) -> str:
 
 
 def create_results_dir(model_name: str, timestamp: str | None = None) -> tuple[Path, str]:
-    """Create and return a unique results directory for ``model_name``."""
-
     root = _ensure_results_root()
     timestamp = timestamp or datetime.now().strftime("%Y%m%d-%H%M%S")
     base_name = f"{_safe_name(model_name)}_{timestamp}"
@@ -59,8 +57,6 @@ def record_experiment(
     model_type: str | None = None,
     epochs: int | None = None,
 ) -> Dict[str, Any]:
-    """Persist model artifacts and metadata for reproducibility."""
-
     run_dir, used_timestamp = create_results_dir(model_name, timestamp)
 
     model_state_file = "model_state.pt"
@@ -139,8 +135,6 @@ def record_experiment(
 
 
 def list_result_runs(model_name: str | None = None) -> list[Path]:
-    """List saved result directories, optionally filtered by ``model_name``."""
-
     root = _ensure_results_root()
     if not root.exists():
         return []
@@ -207,8 +201,6 @@ def _resolve_model_type(model: nn.Module, explicit_type: str | None) -> str:
 
 
 def _update_leaderboards(leaderboard_root: Path, entry: Dict[str, Any]) -> None:
-    """Update per-model-type and global leaderboards with ``entry``."""
-
     leaderboard_root.mkdir(parents=True, exist_ok=True)
 
     model_type = entry.get("model_type", "OTHER")
@@ -249,8 +241,6 @@ def _merge_leaderboard(
     new_entry: Dict[str, Any],
     max_entries: int = 5,
 ) -> List[Dict[str, Any]]:
-    """Insert ``new_entry`` into ``entries`` if it qualifies for top ``max_entries``."""
-
     filtered = [e for e in entries if e.get("results_dir") != new_entry.get("results_dir")]
     filtered.append(new_entry)
     filtered.sort(key=_leaderboard_sort_key, reverse=True)
