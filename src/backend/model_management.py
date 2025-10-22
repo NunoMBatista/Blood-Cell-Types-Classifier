@@ -58,17 +58,7 @@ def record_experiment(
     epochs: int | None = None,
 ) -> Dict[str, Any]:
     run_dir, used_timestamp = create_results_dir(model_name, timestamp)
-
-    model_state_file = "model_state.pt"
-    optimizer_state_file = "optimizer_state.pt"
-    loss_state_file = "loss_state.pt"
-    confusion_file = "confusion_matrix.pt"
-
-    torch.save(model.state_dict(), run_dir / model_state_file)
-    torch.save(optimizer.state_dict(), run_dir / optimizer_state_file)
-    torch.save(criterion.state_dict(), run_dir / loss_state_file)
     confusion_cpu = confusion_matrix.detach().cpu().to(torch.int64)
-    torch.save(confusion_cpu, run_dir / confusion_file)
 
     used_model_type = _resolve_model_type(model, model_type)
     trainable_params = int(sum(p.numel() for p in model.parameters() if p.requires_grad))
@@ -76,7 +66,6 @@ def record_experiment(
     loss_metadata: Dict[str, Any] = {
         "name": criterion.__class__.__name__,
         "repr": repr(criterion),
-        "state_dict_file": loss_state_file,
     }
 
     weight_tensor = getattr(criterion, "weight", None)
@@ -95,18 +84,11 @@ def record_experiment(
         "optimizer": {
             "name": optimizer.__class__.__name__,
             "repr": repr(optimizer),
-            "state_dict_file": optimizer_state_file,
             "defaults": {k: v for k, v in optimizer.defaults.items()},
         },
         "metrics": metrics,
         "confusion_matrix": {
-            "file": confusion_file,
             "matrix": confusion_cpu.tolist(),
-        },
-        "artifacts": {
-            "model_state": model_state_file,
-            "optimizer_state": optimizer_state_file,
-            "loss_state": loss_state_file,
         },
         "model_type": used_model_type,
     }
@@ -147,45 +129,10 @@ def list_result_runs(model_name: str | None = None) -> list[Path]:
     return sorted(path for path in root.glob(pattern) if path.is_dir())
 
 
-def _load_metadata(results_dir: Path) -> Dict[str, Any]:
-    with open(results_dir / "metadata.json", "r", encoding="utf-8") as fh:
+def load_metadata(results_dir: str | Path) -> Dict[str, Any]:
+    directory = Path(results_dir)
+    with open(directory / "metadata.json", "r", encoding="utf-8") as fh:
         return json.load(fh)
-
-
-def load_experiment(
-    model: nn.Module,
-    results_dir: str | Path,
-    optimizer: Optimizer | None = None,
-    criterion: nn.Module | None = None,
-    map_location: Any | None = None,
-) -> Dict[str, Any]:
-    """Load model (and optionally optimizer) state from ``results_dir``."""
-
-    directory = Path(results_dir)
-    metadata = _load_metadata(directory)
-
-    model_state_path = directory / metadata["artifacts"]["model_state"]
-    model.load_state_dict(torch.load(model_state_path, map_location=map_location))
-
-    if optimizer is not None:
-        optimizer_state_path = directory / metadata["artifacts"]["optimizer_state"]
-        optimizer.load_state_dict(torch.load(optimizer_state_path, map_location=map_location))
-
-    if criterion is not None:
-        loss_state_path = directory / metadata["artifacts"]["loss_state"]
-        if loss_state_path.exists():
-            criterion.load_state_dict(torch.load(loss_state_path, map_location=map_location))
-
-    return metadata
-
-
-def load_confusion_matrix(results_dir: str | Path, map_location: Any | None = None) -> torch.Tensor:
-    """Load a previously saved confusion matrix tensor."""
-
-    directory = Path(results_dir)
-    metadata = _load_metadata(directory)
-    confusion_path = directory / metadata["confusion_matrix"]["file"]
-    return torch.load(confusion_path, map_location=map_location)
 
 
 def _resolve_model_type(model: nn.Module, explicit_type: str | None) -> str:
