@@ -13,8 +13,6 @@ from tqdm.auto import tqdm
 
 @dataclass
 class EpochMetrics:
-    """Container for metrics recorded after each epoch."""
-
     train_loss: float
     train_accuracy: float
     val_loss: float | None
@@ -43,6 +41,7 @@ def train_one_epoch(
         leave=False,
     )
 
+    # iterate through every batch
     for inputs, targets in progress:
         inputs = inputs.to(device)
         targets = targets.squeeze().to(device)
@@ -104,7 +103,7 @@ def evaluate_model(
 def train_model(
     model: nn.Module,
     train_loader: Iterable,
-    val_loader: Iterable | None,
+    val_loader: Iterable,
     criterion: nn.Module,
     optimizer: torch.optim.Optimizer,
     device: torch.device,
@@ -112,9 +111,10 @@ def train_model(
 ) -> Tuple[List[EpochMetrics], Dict[str, torch.Tensor]]:
     """Train the model for ``epochs`` and return metrics and best weights."""
 
-    history: List[EpochMetrics] = []
-    best_state = deepcopy(model.state_dict())
-    best_val_acc = -float("inf")
+    history: List[EpochMetrics] = [] # this will store metrics for every epoch
+    
+    best_state = deepcopy(model.state_dict()) # this will store the best model weights
+    best_val_acc = -float("inf") # initialize best validation accuracy
 
     for epoch in range(1, epochs + 1):
         train_loss, train_acc = train_one_epoch(
@@ -129,12 +129,10 @@ def train_model(
 
         val_loss = None
         val_acc = None
-        if val_loader is not None:
-            val_loss, val_acc = evaluate_model(model, val_loader, criterion, device)
-            if val_acc > best_val_acc:
-                best_val_acc = val_acc
-                best_state = deepcopy(model.state_dict())
-        else:
+        
+        val_loss, val_acc = evaluate_model(model, val_loader, criterion, device)
+        if val_acc > best_val_acc:
+            best_val_acc = val_acc
             best_state = deepcopy(model.state_dict())
 
         history.append(

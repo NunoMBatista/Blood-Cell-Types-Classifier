@@ -5,8 +5,6 @@ from torch import nn
 
 
 class BaselineMLP(nn.Module):
-	"""Simple MLP that flattens BloodMNIST images internally."""
-
 	def __init__(
 		self,
 		input_shape: Sequence[int] = (3, 28, 28),
@@ -42,6 +40,7 @@ class BaselineMLP(nn.Module):
 		layers.append(nn.Linear(in_features, num_classes))
 
 		self.mlp = nn.Sequential(*layers)
+  
 		self.model_config = {
 			"input_shape": self.input_shape,
 			"hidden_dims": list(self.hidden_dims),
@@ -57,8 +56,3 @@ class BaselineMLP(nn.Module):
 		"""Return a shallow copy of the architecture configuration."""
 		return dict(self.model_config)
 
-
-def build_baseline_mlp(**kwargs: Any) -> BaselineMLP:
-	"""Convenience factory with sensible defaults for quick experimentation."""
-
-	return BaselineMLP(**kwargs)

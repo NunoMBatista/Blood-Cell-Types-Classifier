@@ -5,8 +5,6 @@ from torch import nn
 
 
 class BaselineCNN(nn.Module):
-    """Baseline convolutional classifier for BloodMNIST images."""
-
     def __init__(
         self,
         input_channels: int = 3,
@@ -74,9 +72,3 @@ class BaselineCNN(nn.Module):
         """Return a shallow copy of the architecture configuration."""
 
         return dict(self.model_config)
-
-
-def build_baseline_cnn(**kwargs: Any) -> BaselineCNN:
-    """Convenience factory mirroring the baseline CNN defaults."""
-
-    return BaselineCNN(**kwargs)
