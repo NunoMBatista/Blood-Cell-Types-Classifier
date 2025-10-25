@@ -1,5 +1,3 @@
-"""Experiment management helpers for BloodMNIST models."""
-
 from __future__ import annotations
 
 import json

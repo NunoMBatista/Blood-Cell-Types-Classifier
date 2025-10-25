@@ -1,7 +1,3 @@
-"""
-Data loading and preprocessing utilities for BloodMNIST dataset.
-"""
-
 import numpy as np
 import torch
 import torchvision
