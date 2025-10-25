@@ -24,15 +24,34 @@ class BaselineMLP(nn.Module):
 
 		input_features = int(torch.tensor(self.input_shape).prod().item())
 
+		"""
+		Hidden dims (512, 256): 
+	
+			Architecture:
+	
+				Input: (3, 28, 28) -> Flatten() -> (3*28*28=2352) -> Linear(2352, 512) -> ReLU -> Dropout(0.2) -> (512)
+				Input: (512) -> Linear(512, 256) -> ReLU -> Dropout(0.2) -> (256)
+				Input: (256) -> Linear(256, 8) -> (8) 
+    
+			Parameter count:
+				Number of parameters in a Linear layer = in_features * out_features + out_features (for bias)
+				1st Linear Layer: 2352*512 + 512 = 1,204,864
+				2nd Linear Layer: 512*256 + 256 = 131,328
+				3rd Linear Layer: 256*8 + 8 = 2,056
+				Total Linear Layer Parameters = 1,204,864 + 131,328 + 2,056 = 1,338,248
+    
+		"""
+
+
 		layers: list[nn.Module] = [nn.Flatten()]
 		in_features = input_features
 		for hidden_dim in self.hidden_dims:
 			layers.extend(
 				[
-					nn.Linear(in_features, hidden_dim),
-					nn.BatchNorm1d(hidden_dim),
-					nn.ReLU(inplace=True),
-					nn.Dropout(p=dropout),
+					nn.Linear(in_features, hidden_dim, bias=True), # fully connected layer, maps input features to hidden_dim features
+					nn.BatchNorm1d(hidden_dim), # normalizes the output of the linear layer to improve training stability and performance
+					nn.ReLU(inplace=True), # applies the ReLU activation function to introduce non-linearity
+					nn.Dropout(p=dropout), # randomly sets a fraction of input units to 0 during training to prevent overfitting
 				]
 			)
 			in_features = hidden_dim
